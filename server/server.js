@@ -7,7 +7,6 @@ const productRoutes = require("./routes/productRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 
 dotenv.config();
-
 connectDB();
 
 const app = express();
@@ -31,6 +30,9 @@ app.get("/", (req, res) => {
   });
 });
 
+// Ignore browser favicon request
+app.get("/favicon.ico", (req, res) => res.sendStatus(204));
+
 // API Routes
 app.use("/api/products", productRoutes);
 
@@ -48,5 +50,4 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode`);
-  console.log(`Server URL: http://localhost:${PORT}`);
 });
